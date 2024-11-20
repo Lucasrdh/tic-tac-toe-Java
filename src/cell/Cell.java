@@ -1,3 +1,5 @@
+package cell;
+
 public class Cell {
     private String representation;
 

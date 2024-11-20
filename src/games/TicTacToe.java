@@ -1,6 +1,8 @@
-import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+package games;
+
+import player.*;
+import cell.*;
+import ui.*;
 
 public class TicTacToe extends Cell implements InteractionUtilisateur {
     private static final int size = 3;
@@ -8,12 +10,11 @@ public class TicTacToe extends Cell implements InteractionUtilisateur {
     private Player player1;
     private Player player2;
     private Player currentPlayer;
+    private GameDisplay affichage;
 
-    private Menu menu = new Menu();
 
-
-    public TicTacToe(Menu menu) {
-        this.menu = menu;
+    public TicTacToe(GameDisplay affichage) {
+        this.affichage = affichage;
         grid = new Cell[size][size];
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
@@ -24,7 +25,7 @@ public class TicTacToe extends Cell implements InteractionUtilisateur {
     }
 
     private void whoPlay() {
-        menu.selectGameMode();
+        Menu.SELECTGAMEMODE.display();
         String gameRule = getInput();
         switch (gameRule) {
             case "1":
@@ -40,7 +41,7 @@ public class TicTacToe extends Cell implements InteractionUtilisateur {
                 player2 = new ArtificialPlayer("Player 2", "0");
                 break;
             default:
-                menu.selectGameMode();
+                Menu.SELECTGAMEMODE.display();
                 whoPlay();
         }
         currentPlayer = player1;
@@ -50,15 +51,15 @@ public class TicTacToe extends Cell implements InteractionUtilisateur {
         boolean validMove = false;
         int[] coordonnees = null;
         while (!validMove) {
-            coordonnees = player.makeMove(menu,grid);
+            coordonnees = player.makeMove(grid);
             if (grid[coordonnees[0]][coordonnees[1]].isEmpty()) {
                 validMove = true;
 
             } else {
                 if (player instanceof ArtificialPlayer) {
-                    coordonnees = player.makeMove(menu,grid);
+                    coordonnees = player.makeMove(grid);
                 } else {
-                    menu.caseOccupee();
+                    Menu.CASEOCCUPEE.display();
                 }
             }
         }
@@ -111,36 +112,21 @@ public class TicTacToe extends Cell implements InteractionUtilisateur {
         return false;
     }
 
-    public void display() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                System.out.print(grid[i][j].getRepresentation());
-                if (j < size - 1) {
-                    System.out.print("|");
-                }
-            }
-            System.out.println();
-            if (i < size - 1) {
-                System.out.print("------");
-                System.out.println();
-            }
-        }
-    }
 
     public void play() {
         boolean gameRunning = true;
         while (gameRunning) {
-            display();
+            affichage.renduGrid(grid);
             int[] resultat = moveIsCorrect(currentPlayer);
             setOwner(resultat[0], resultat[1], currentPlayer);
 
             if (isWinner()) {
-                display();
-                menu.victoire();
+                affichage.renduGrid(grid);
+                Menu.VICTOIRE.display();
                 gameRunning = false;
             } else if (isDraw()) {
-                display();
-                menu.matchNul();
+                affichage.renduGrid(grid);
+                Menu.MATCHNUL.display();
                 gameRunning = false;
             } else {
                 currentPlayer = (currentPlayer == player1) ? player2 : player1;

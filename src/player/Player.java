@@ -1,3 +1,8 @@
+package player;
+import cell.*;
+import games.*;
+import ui.*;
+
 public abstract class Player {
     private String name;
     private String representation;
@@ -7,7 +12,7 @@ public abstract class Player {
         this.representation = representation;
     }
 
-    public abstract int[] makeMove(Menu menu, Cell[][] grid);
+    public abstract int[] makeMove(Cell[][] grid);
 
     public Player() {
 

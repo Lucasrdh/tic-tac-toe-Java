@@ -1,3 +1,8 @@
+package ui;
+import player.*;
+import cell.*;
+import games.*;
+
 import java.util.Scanner;
 
 public interface InteractionUtilisateur {

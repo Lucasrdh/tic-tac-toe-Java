@@ -1,6 +1,9 @@
+import games.TicTacToe;
+import ui.*;
 public class Main {
     public static void main(String[] args) {
-TicTacToe ticTacToe = new TicTacToe(new Menu());
+        GameDisplay affichage = new GameDisplay();
+TicTacToe ticTacToe = new TicTacToe(affichage);
 ticTacToe.play();
     }
 }

@@ -1,3 +1,9 @@
+package player;
+import cell.*;
+import games.*;
+import ui.*;
+
+
 public class ArtificialPlayer extends Player {
 
     public ArtificialPlayer(String name, String representation) {
@@ -5,7 +11,7 @@ public class ArtificialPlayer extends Player {
     }
 
     @Override
-    public int[] makeMove(Menu menu, Cell[][] grid) {
+    public int[] makeMove(Cell[][] grid) {
         int[] coordonnees = new int[2];
         boolean validMove = false;
 
