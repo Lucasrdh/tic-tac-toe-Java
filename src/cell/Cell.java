@@ -4,7 +4,12 @@ public class Cell {
     private String representation;
 
     public Cell() {
-        this.representation = " ";
+        enum Celltype{
+            EMPTY,
+            X,
+            O;
+            private final String representation;
+        }
     }
     public boolean isEmpty() {
         return this.representation.equals(" ");
