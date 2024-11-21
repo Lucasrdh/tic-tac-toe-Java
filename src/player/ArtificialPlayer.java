@@ -6,8 +6,8 @@ import ui.*;
 
 public class ArtificialPlayer extends Player {
 
-    public ArtificialPlayer(String name, String representation) {
-        super(name, representation);
+    public ArtificialPlayer(String name, State state) {
+        super(name,state);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ArtificialPlayer extends Player {
             int row = (int) (Math.random() * 3);
             int col = (int) (Math.random() * 3);
 
-            if (grid[row][col].isEmpty()) {
+            if (grid[row][col].getState() == state.EMPTY) {
                 coordonnees[0] = row;
                 coordonnees[1] = col;
                 validMove = true;

@@ -1,25 +1,31 @@
 package cell;
 
 public class Cell {
-    private String representation;
+    private State state;
 
+    // Constructeur par défaut, initialise l'état de la cellule à EMPTY
     public Cell() {
-        enum Celltype{
-            EMPTY,
-            X,
-            O;
-            private final String representation;
-        }
-    }
-    public boolean isEmpty() {
-        return this.representation.equals(" ");
+        this.state = State.EMPTY;
     }
 
-    public String getRepresentation() {
-
-        return representation;
+    // Méthode pour définir l'état de la cellule
+    public void setState(State state) {
+        this.state = state;
     }
-    public void setRepresentation(String representation) {
-        this.representation = representation;
+
+    // Méthode pour obtenir la représentation textuelle de l'état de la cellule
+    public String getRep() {
+        return this.state.getValue();
+    }
+
+    // Retourne l'état actuel de la cellule
+    public State getState() {
+        return this.state;
+    }
+
+    // Redéfinition de la méthode toString() pour une représentation textuelle plus intuitive
+    @Override
+    public String toString() {
+        return getRep();
     }
 }

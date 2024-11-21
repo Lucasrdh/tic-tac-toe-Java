@@ -1,15 +1,16 @@
 package player;
+
 import cell.*;
 import games.*;
 import ui.*;
 
 public abstract class Player {
     private String name;
-    private String representation;
+    State state;
 
-    public Player(String name, String representation) {
+    public Player(String name, State state) {
         this.name = name;
-        this.representation = representation;
+        this.state = state;
     }
 
     public abstract int[] makeMove(Cell[][] grid);
@@ -21,13 +22,18 @@ public abstract class Player {
     public String getName() {
         return name;
     }
-
-    public String getRepresentation() {
-        return representation;
+    public State getState() {
+        return state;
     }
-
-    public void setRepresentation(String representation) {
-        this.representation = representation;
+    public void setState(State state) {
+        this.state = state;
+    }
+    public String getRep(){
+        return state.getValue();
+    }
+    @Override
+    public String toString() {
+        return getRep();
     }
 }
 

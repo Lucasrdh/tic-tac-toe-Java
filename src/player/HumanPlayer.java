@@ -7,8 +7,8 @@ import java.util.regex.Matcher;
 
 public class HumanPlayer extends Player implements InteractionUtilisateur {
 
-    public HumanPlayer(String name, String representation) {
-        super(name, representation);
+    public HumanPlayer(String name, State state) {
+        super(name, state);
     }
 
     @Override

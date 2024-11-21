@@ -1,6 +1,6 @@
 package games;
 
-import cell.Cell;
+import cell.*;
 import player.ArtificialPlayer;
 import player.HumanPlayer;
 import player.Player;
@@ -8,10 +8,8 @@ import ui.GameDisplay;
 import ui.InteractionUtilisateur;
 import ui.Menu;
 
-import javax.swing.*;
-
 public abstract class Game implements InteractionUtilisateur {
-    private int size;
+    private int size = 3;
     private Cell[][] grid;
     private Player player1;
     private Player player2;
@@ -34,16 +32,16 @@ public abstract class Game implements InteractionUtilisateur {
         String gameRule = getInput();
         switch (gameRule) {
             case "1":
-                player1 = new HumanPlayer("Player 1", "X");
-                player2 = new HumanPlayer("Player 2", "0");
+                player1 = new HumanPlayer("Player 1", State.X);
+                player2 = new HumanPlayer("Player 2", State.O);
                 break;
             case "2":
-                player1 = new HumanPlayer("Player 1", "X");
-                player2 = new ArtificialPlayer("Player 2", "0");
+                player1 = new HumanPlayer("Player 1", State.X);
+                player2 = new ArtificialPlayer("Player 2", State.O);
                 break;
             case "3":
-                player1 = new ArtificialPlayer("Player 1", "X");
-                player2 = new ArtificialPlayer("Player 2", "0");
+                player1 = new ArtificialPlayer("Player 1", State.X);
+                player2 = new ArtificialPlayer("Player 2", State.O);
                 break;
             default:
                 Menu.SELECTGAMEMODE.display();
@@ -57,7 +55,7 @@ public abstract class Game implements InteractionUtilisateur {
         int[] coordonnees = null;
         while (!validMove) {
             coordonnees = player.makeMove(grid);
-            if (grid[coordonnees[0]][coordonnees[1]].isEmpty()) {
+            if (grid[coordonnees[0]][coordonnees[1]].getState() == State.EMPTY) {
                 validMove = true;
 
             } else {
@@ -73,7 +71,7 @@ public abstract class Game implements InteractionUtilisateur {
 
 
     public void setOwner(int row, int col, Player player) {
-        grid[row][col].setRepresentation(player.getRepresentation());
+        grid[row][col].setState(player.getState());
 
     }
 
@@ -81,7 +79,7 @@ public abstract class Game implements InteractionUtilisateur {
     private boolean isDraw() {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (grid[i][j].isEmpty()) {
+                if (grid[i][j].getState() == State.EMPTY) {
                     return false;
                 }
             }
@@ -91,27 +89,27 @@ public abstract class Game implements InteractionUtilisateur {
 
     private boolean isWinner() {
         for (int i = 0; i < size; i++) {
-            if (grid[i][0].getRepresentation().equals(currentPlayer.getRepresentation()) &&
-                    grid[i][1].getRepresentation().equals(currentPlayer.getRepresentation()) &&
-                    grid[i][2].getRepresentation().equals(currentPlayer.getRepresentation())) {
+            if (grid[i][0].getState().equals(currentPlayer.getState()) &&
+                    grid[i][1].getState().equals(currentPlayer.getState()) &&
+                    grid[i][2].getState().equals(currentPlayer.getState())) {
                 return true;
             }
         }
         for (int j = 0; j < size; j++) {
-            if (grid[0][j].getRepresentation().equals(currentPlayer.getRepresentation())
-                    && grid[1][j].getRepresentation().equals(currentPlayer.getRepresentation())
-                    && grid[2][j].getRepresentation().equals(currentPlayer.getRepresentation())) {
+            if (grid[0][j].getState().equals(currentPlayer.getState())
+                    && grid[1][j].getState().equals(currentPlayer.getState())
+                    && grid[2][j].getState().equals(currentPlayer.getState())) {
                 return true;
             }
         }
-        if (grid[0][0].getRepresentation().equals(currentPlayer.getRepresentation())
-                && grid[1][1].getRepresentation().equals(currentPlayer.getRepresentation())
-                && grid[2][2].getRepresentation().equals(currentPlayer.getRepresentation())) {
+        if (grid[0][0].getState().equals(currentPlayer.getState())
+                && grid[1][1].getState().equals(currentPlayer.getState())
+                && grid[2][2].getState().equals(currentPlayer.getState())) {
             return true;
         }
-        if (grid[0][2].getRepresentation().equals(currentPlayer.getRepresentation())
-                && grid[1][1].getRepresentation().equals(currentPlayer.getRepresentation())
-                && grid[2][2].getRepresentation().equals(currentPlayer.getRepresentation())) {
+        if (grid[0][2].getState().equals(currentPlayer.getState())
+                && grid[1][1].getState().equals(currentPlayer.getState())
+                && grid[2][2].getState().equals(currentPlayer.getState())) {
             return true;
         }
         return false;
