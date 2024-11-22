@@ -12,10 +12,10 @@ public class Puissance4 extends Game implements InteractionUtilisateur {
 
     @Override
     protected int getGridSizeRow() {
-        return 0;
+        return 6;
     }
     @Override
     protected int getGridSizeColumn(){
-        return 0;
+        return 7;
     }
 }
