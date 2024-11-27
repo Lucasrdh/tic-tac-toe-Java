@@ -91,7 +91,7 @@ public abstract class Game implements InteractionUtilisateur {
     }
 
 
-    private boolean isDraw() {
+    public boolean isDraw() {
         for (int i = 0; i < sizeRow; i++) {
             for (int j = 0; j < sizeCol; j++) {
                 if (grid[i][j].getState() == State.EMPTY) {
@@ -106,7 +106,7 @@ public abstract class Game implements InteractionUtilisateur {
         return row >= 0 && row < sizeRow && col >= 0 && col < sizeCol;
     }
 
-    private boolean isWinner() {
+    public boolean isWinner() {
         for (int i = 0; i < sizeRow; i++) {
             for (int j = 0; j < sizeCol; j++) {
                 if (grid[i][j].getState() != State.EMPTY) {
@@ -122,7 +122,6 @@ public abstract class Game implements InteractionUtilisateur {
     private boolean rowOk(int row, int col) {
         State playerState = grid[row][col].getState();
         int count = 1;
-
 
 
         for (int k = 1; k < winCondition; k++) {
@@ -165,6 +164,14 @@ public abstract class Game implements InteractionUtilisateur {
         return count >= winCondition;
     }
 
+    public Cell[][] getGrid() {
+        return grid;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
     private boolean diag2Ok(int row, int col) {
         State playerState = grid[row][col].getState();
         int count = 1;
@@ -181,26 +188,8 @@ public abstract class Game implements InteractionUtilisateur {
         return count >= winCondition;
     }
 
-
-    public void play() {
-        boolean gameRunning = true;
-        while (gameRunning) {
-            affichage.renduGrid(grid);
-            int[] resultat = moveIsCorrect(currentPlayer);
-            setOwner(resultat[0], resultat[1], currentPlayer);
-
-            if (isWinner()) {
-                affichage.renduGrid(grid);
-                Menu.VICTOIRE.display();
-                gameRunning = false;
-            } else if (isDraw()) {
-                affichage.renduGrid(grid);
-                Menu.MATCHNUL.display();
-                gameRunning = false;
-            } else {
-                currentPlayer = (currentPlayer == player1) ? player2 : player1;
-            }
-        }
+    public void switchPlayer() {
+        currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 }
 
