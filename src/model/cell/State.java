@@ -1,4 +1,4 @@
-package cell;
+package model.cell;
 
 public enum State {
     EMPTY(". ."),

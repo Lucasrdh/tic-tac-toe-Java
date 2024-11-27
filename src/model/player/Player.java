@@ -1,8 +1,7 @@
-package player;
+package model.player;
 
-import cell.*;
-import games.*;
-import ui.*;
+import model.cell.Cell;
+import model.cell.State;
 
 public abstract class Player {
     private String name;
@@ -15,9 +14,6 @@ public abstract class Player {
 
     public abstract int[] makeMove(Cell[][] grid);
 
-    public Player() {
-
-    }
 
     public String getName() {
         return name;

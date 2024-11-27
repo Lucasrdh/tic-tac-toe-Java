@@ -1,15 +1,14 @@
-package games;
+package model.games;
 
-import player.*;
-import cell.*;
-import ui.*;
+import view.GameDisplay;
+import view.InteractionUtilisateur;
 
 public class TicTacToe extends Game implements InteractionUtilisateur {
 
 
     public TicTacToe(GameDisplay affichage) {
         super(affichage);
-
+this.setWinCondition(3);
     }
 
     @Override

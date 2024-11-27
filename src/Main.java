@@ -1,5 +1,6 @@
-import games.TicTacToe;
-import ui.*;
+import model.games.TicTacToe;
+import view.GameDisplay;
+
 public class Main {
     public static void main(String[] args) {
         GameDisplay affichage = new GameDisplay();

@@ -1,6 +1,6 @@
-package ui;
+package view;
 
-import cell.Cell;
+import model.cell.Cell;
 
 public class GameDisplay {
     public void renduGrid(Cell[][] grid) {

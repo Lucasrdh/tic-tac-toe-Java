@@ -1,7 +1,6 @@
-package player;
-import cell.*;
-import games.*;
-import ui.*;
+package model.player;
+import model.cell.Cell;
+import model.cell.State;
 
 
 public class ArtificialPlayer extends Player {

@@ -1,6 +1,8 @@
-package player;
-import cell.*;
-import ui.*;
+package model.player;
+import model.cell.Cell;
+import model.cell.State;
+import view.InteractionUtilisateur;
+import view.Menu;
 
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;

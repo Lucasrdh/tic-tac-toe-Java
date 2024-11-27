@@ -1,11 +1,13 @@
-package games;
+package model.games;
 
-import ui.GameDisplay;
-import ui.InteractionUtilisateur;
+import view.GameDisplay;
+import view.InteractionUtilisateur;
 
 public class Puissance4 extends Game implements InteractionUtilisateur {
     public Puissance4(GameDisplay affichage) {
         super(affichage);
+        this.setWinCondition(4);
+
     }
 
 

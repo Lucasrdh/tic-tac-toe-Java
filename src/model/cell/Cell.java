@@ -1,4 +1,4 @@
-package cell;
+package model.cell;
 
 public class Cell {
     private State state;

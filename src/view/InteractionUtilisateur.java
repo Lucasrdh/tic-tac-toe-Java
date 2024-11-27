@@ -1,7 +1,4 @@
-package ui;
-import player.*;
-import cell.*;
-import games.*;
+package view;
 
 import java.util.Scanner;
 
