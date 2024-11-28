@@ -14,7 +14,7 @@ public class GameDisplay {
             }
             System.out.println();
             if (i < size - 1) {
-                System.out.print("------");
+                System.out.print("---");
                 System.out.println();
             }
         }

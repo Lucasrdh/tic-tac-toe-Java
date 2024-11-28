@@ -20,6 +20,21 @@ public abstract class Game implements InteractionUtilisateur {
 
     private int winCondition;
 
+    public void setSizeRow(int sizeRow) {
+        this.sizeRow = sizeRow;
+    }
+
+    public int getSizeRow() {
+        return sizeRow;
+    }
+
+    public int getSizeCol() {
+        return sizeCol;
+    }
+
+    public void setSizeCol(int sizeCol) {
+        this.sizeCol = sizeCol;
+    }
 
     public Game(GameDisplay affichage) {
         this.affichage = affichage;
@@ -37,6 +52,10 @@ public abstract class Game implements InteractionUtilisateur {
     protected abstract int getGridSizeColumn();
 
     protected abstract int getGridSizeRow();
+
+    public int[] getGridSizeNeed() {
+        return new int[] { sizeRow, sizeCol };
+    }
 
     protected void setWinCondition(int winCondition) {
         this.winCondition = winCondition;

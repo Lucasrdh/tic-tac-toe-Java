@@ -8,6 +8,7 @@ import view.Menu;
 public class GameController {
     private Game game;
     private GameDisplay affichage;
+    private static Game currentGame;
 
     public GameController(Game game, GameDisplay affichage) {
         this.game = game;
@@ -34,7 +35,15 @@ public class GameController {
                 game.switchPlayer();
             }
         }
+
     }
 
+    public static Game getCurrentGame() {
+        return currentGame;
+    }
 
+    public void setGame(Game game) {
+        this.game = game;
+        currentGame = game;
+    }
 }
