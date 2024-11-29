@@ -10,6 +10,7 @@ import view.Menu;
 import java.util.Scanner;
 
 public class GameFactory {
+
     public static Game createGame(GameDisplay affichage) {
         Scanner scanner = new Scanner(System.in);
         Menu.SELECTGAME.display();

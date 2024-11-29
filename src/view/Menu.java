@@ -1,7 +1,6 @@
 package view;
 
 public enum Menu {
-    //HOWTOPLAY("Entrez les coordonnées de votre coup (ligne et colonne, entre 1 et 3, séparées par un espace). Ex: 1 2\n"),
     CASEOCCUPEE("Case occupée, réessaie ! \n"),
     INVALIDE("Entrée invalide (ligne + colonne) ex = 1 1\n"),
     MATCHNUL("C'est un match nul !\n"),

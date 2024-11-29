@@ -8,7 +8,6 @@ import view.Menu;
 public class GameController {
     private Game game;
     private GameDisplay affichage;
-    private static Game currentGame;
 
     public GameController(Game game, GameDisplay affichage) {
         this.game = game;
@@ -27,7 +26,6 @@ public class GameController {
                 affichage.renduGrid(game.getGrid());
                 Menu.VICTOIRE.display();
                 gameRunning = false;
-                break;
             } else if (game.isDraw()) {
                 affichage.renduGrid(game.getGrid());
                 Menu.MATCHNUL.display();
@@ -39,12 +37,7 @@ public class GameController {
 
     }
 
-    public static Game getCurrentGame() {
-        return currentGame;
-    }
-
     public void setGame(Game game) {
         this.game = game;
-        currentGame = game;
     }
 }
