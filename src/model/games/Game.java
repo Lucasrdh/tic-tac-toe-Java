@@ -36,11 +36,9 @@ public abstract class Game implements InteractionUtilisateur {
         this.sizeCol = sizeCol;
     }
 
-    public Game(GameDisplay affichage) {
+    public Game(GameDisplay affichage,int sizeRow, int sizeCol) {
         this.affichage = affichage;
-        this.sizeRow = getGridSizeRow();
-        this.sizeCol = getGridSizeColumn();
-        grid = new Cell[sizeCol][sizeRow];
+        grid = new Cell[sizeRow][sizeCol];
         for (int i = 0; i < sizeRow; i++) {
             for (int j = 0; j < sizeCol; j++) {
                 grid[i][j] = new Cell();
@@ -49,9 +47,7 @@ public abstract class Game implements InteractionUtilisateur {
         whoPlay();
     }
 
-    protected abstract int getGridSizeColumn();
 
-    protected abstract int getGridSizeRow();
 
     public int[] getGridSizeNeed() {
         return new int[] { sizeRow, sizeCol };
@@ -111,8 +107,8 @@ public abstract class Game implements InteractionUtilisateur {
 
 
     public boolean isDraw() {
-        for (int i = 0; i < sizeRow; i++) {
-            for (int j = 0; j < sizeCol; j++) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j].getState() == State.EMPTY) {
                     return false;
                 }
@@ -122,12 +118,12 @@ public abstract class Game implements InteractionUtilisateur {
     }
 
     private boolean isValidCell(int row, int col) {
-        return row >= 0 && row < sizeRow && col >= 0 && col < sizeCol;
+        return row >= 0 && row < grid.length && col >= 0 && col < grid[0].length;
     }
 
     public boolean isWinner() {
-        for (int i = 0; i < sizeRow; i++) {
-            for (int j = 0; j < sizeCol; j++) {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
                 if (grid[i][j].getState() != State.EMPTY) {
                     if (rowOk(i, j) || colOk(i, j) || diag1Ok(i, j) || diag2Ok(i, j)) {
                         return true;

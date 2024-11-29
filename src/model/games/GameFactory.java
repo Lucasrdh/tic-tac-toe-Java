@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class GameFactory {
     public static Game createGame(GameDisplay affichage) {
         Scanner scanner = new Scanner(System.in);
-        Menu.SELECTGAME.display(); // Affiche le menu
+        Menu.SELECTGAME.display();
         int choix = getValidChoice(scanner);
 
         return switch (choix) {
@@ -31,7 +31,7 @@ public class GameFactory {
                 choix = scanner.nextInt();
             } catch (Exception e) {
                 System.out.println("Entrée invalide. Veuillez entrer un nombre.");
-                scanner.next(); // Nettoie l'entrée
+                scanner.next();
             }
         }
         return choix;

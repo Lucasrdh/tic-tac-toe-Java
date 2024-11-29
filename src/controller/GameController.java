@@ -27,6 +27,7 @@ public class GameController {
                 affichage.renduGrid(game.getGrid());
                 Menu.VICTOIRE.display();
                 gameRunning = false;
+                break;
             } else if (game.isDraw()) {
                 affichage.renduGrid(game.getGrid());
                 Menu.MATCHNUL.display();

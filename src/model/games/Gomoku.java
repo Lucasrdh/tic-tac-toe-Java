@@ -5,19 +5,16 @@ import view.InteractionUtilisateur;
 
 public class Gomoku extends Game implements InteractionUtilisateur {
     public Gomoku(GameDisplay affichage) {
-        super(affichage);
+        super(affichage,15,15);
         this.setWinCondition(5);
-        this.setSizeRow(15);
-        this.setSizeCol(15);
     }
 
 
-    @Override
-    protected int getGridSizeRow() {
+        protected int getGridSizeRow() {
         return getSizeRow();
     }
 
-    @Override
+
     protected int getGridSizeColumn() {
         return getSizeCol();
     }
