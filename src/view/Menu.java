@@ -7,7 +7,9 @@ public enum Menu {
     VICTOIRE("Victoire !\n"),
     SELECTGAMEMODE("Select game mode = 1 PvP, 2 PvM, 3 MvM : \n"),
     SELECTGAME("Choisisser votre jeux : \n 1 - TicTacToe \n 2 - Puissance 4 \n 3 - Gomoku \n"),
-    BONNEENTREE("Rentre des coordonnées entre 1 et %d pour la ligne, et entre 1 et %d pour la colonne.\n");
+    BONNEENTREE("Rentre des coordonnées entre 1 et %d pour la ligne, et entre 1 et %d pour la colonne.\n"),
+    BONNEENTREEP4("Rentre des coordonnées entre 1 et %d pour la colonne.\n"),
+    COLONNEPLEINE("Déjà pris !\n");
 
     private final String message;
 

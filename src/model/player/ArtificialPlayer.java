@@ -31,5 +31,27 @@ public class ArtificialPlayer extends Player {
         return coordonnees;
     }
 
+    @Override
+    public int[] makeMovep4(Cell[][] grid) {
+        int[] coordonnees = new int[2];
+        boolean validMove = false;
+
+        int sizeRow = grid.length;
+        int sizeCol = grid[0].length;
+
+        while (!validMove) {
+            int col = (int) (Math.random() * sizeCol);
+            for (int row = sizeRow - 1; row >= 0; row--) {
+                if (grid[row][col].getState() == State.EMPTY) {
+                    coordonnees[1] = col;
+                    validMove = true;
+                    break;
+                }
+            }
+        }
+        return coordonnees;
+    }
+
+
 
 }

@@ -17,8 +17,16 @@ public abstract class Game implements InteractionUtilisateur {
     private Player player2;
     private Player currentPlayer;
     private GameDisplay affichage;
-
+    private Game currentGame;
     private int winCondition;
+
+    public Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public void setCurrentGame(Game currentGame) {
+        this.currentGame = currentGame;
+    }
 
     public void setSizeRow(int sizeRow) {
         this.sizeRow = sizeRow;
@@ -36,8 +44,9 @@ public abstract class Game implements InteractionUtilisateur {
         this.sizeCol = sizeCol;
     }
 
-    public Game(GameDisplay affichage,int sizeRow, int sizeCol) {
+    public Game(GameDisplay affichage, int sizeRow, int sizeCol) {
         this.affichage = affichage;
+        this.currentGame = this;
         grid = new Cell[sizeRow][sizeCol];
         for (int i = 0; i < sizeRow; i++) {
             for (int j = 0; j < sizeCol; j++) {
@@ -48,9 +57,8 @@ public abstract class Game implements InteractionUtilisateur {
     }
 
 
-
     public int[] getGridSizeNeed() {
-        return new int[] { sizeRow, sizeCol };
+        return new int[]{sizeRow, sizeCol};
     }
 
     protected void setWinCondition(int winCondition) {
@@ -83,21 +91,29 @@ public abstract class Game implements InteractionUtilisateur {
     public int[] moveIsCorrect(Player player) {
         boolean validMove = false;
         int[] coordonnees = null;
-        while (!validMove) {
-            coordonnees = player.makeMove(grid);
-            if (grid[coordonnees[0]][coordonnees[1]].getState() == State.EMPTY) {
-                validMove = true;
 
+        while (!validMove) {
+
+            if (currentGame instanceof Puissance4) {
+                coordonnees = player.makeMovep4(grid);
+                validMove = true;
             } else {
-                if (player instanceof ArtificialPlayer) {
-                    coordonnees = player.makeMove(grid);
+                coordonnees = player.makeMove(grid);
+
+                if (grid[coordonnees[0]][coordonnees[1]].getState() == State.EMPTY) {
+                    validMove = true;
                 } else {
-                    Menu.CASEOCCUPEE.display();
+                    if (player instanceof ArtificialPlayer) {
+                        continue;
+                    } else {
+                        Menu.CASEOCCUPEE.display();
+                    }
                 }
             }
         }
         return coordonnees;
     }
+
 
 
     public void setOwner(int row, int col, Player player) {
@@ -209,84 +225,3 @@ public abstract class Game implements InteractionUtilisateur {
 }
 
 
-////    private boolean isWinner() {
-////
-////        for (int i = 0; i < sizeRow; i++) {
-////            if (grid[i][0].getState().equals(currentPlayer.getState()) &&
-////                    grid[i][1].getState().equals(currentPlayer.getState()) &&
-////                    grid[i][2].getState().equals(currentPlayer.getState())) {
-////                return true;
-////            }
-////        }
-////        for (int j = 0; j < sizeCol; j++) {
-////            if (grid[0][j].getState().equals(currentPlayer.getState())
-////                    && grid[1][j].getState().equals(currentPlayer.getState())
-////                    && grid[2][j].getState().equals(currentPlayer.getState())) {
-////                return true;
-////            }
-////        }
-////        if (grid[0][0].getState().equals(currentPlayer.getState())
-////                && grid[1][1].getState().equals(currentPlayer.getState())
-////                && grid[2][0].getState().equals(currentPlayer.getState())) {
-////            return true;
-////        }
-////        if (grid[0][2].getState().equals(currentPlayer.getState())
-////                && grid[1][1].getState().equals(currentPlayer.getState())
-////                && grid[2][2].getState().equals(currentPlayer.getState())) {
-////            return true;
-////        }
-////        return false;
-////    }
-//private boolean checkDirection(int row, int col, int deltaRow, int deltaCol) {
-//    int count = 1;
-//    count += countConsecutive(row, col, deltaRow, deltaCol);
-//    count += countConsecutive(row, col, -deltaRow, -deltaCol);
-//    return count >= winCondition;
-//    //Compte la cellule jouée
-//    // Vérifie dans une direction (par exemple, vers la droite ou en bas)
-//    // Vérifie dans la direction opposée (par exemple, vers la gauche ou en haut)
-//    // Retourne true si au moins 4 cellules alignées
-//    // return count >= winCondition;
-//}
-//
-//private int countConsecutive(int row, int col, int deltaRow, int deltaCol) {
-//
-//    int count = 0;
-//    State playerState = grid[row][col].getState();
-//    int currentRow = row + deltaRow;
-//    int currentCol = col + deltaCol;
-//    while (currentRow >= 0 && currentRow < sizeRow &&
-//            currentCol >= 0 && currentCol < sizeCol
-//            && grid[currentRow][currentCol].getState() == playerState) {
-//        count++;
-//        currentRow += deltaRow;
-//        currentCol += deltaCol;
-//    }
-//    return count;
-//    // Initialise le compteur à 0
-//    // Récupère l'état du joueur courant
-//    // Avance d'une cellule dans la direction deltaRow
-//    // Avance d'une cellule dans la direction deltaCol
-//    // Parcourt la grille tant qu'on est dans les limites et que les cellules sont alignées
-//// while () vérifie que la ligne est valide
-//    // && que la colonne est valide
-//    // && que l'état correspond grid state == model.player state
-//    //count++ incremente le compteur si la cellule est alignée
-//    //avance d'une cellule dans la direction
-//    //avance d'une cellule dans la direction
-//    //return count;
-//
-//
-//}
-//
-//private boolean isWinner(int lastRow, int lastCol) {
-//    // Vérifie 4 directions : horizontale, verticale, diagonale principale et diagonale secondaire.
-//    return checkDirection(lastRow,lastCol,0, 1)
-//            || checkDirection(lastRow,lastCol,1,0)
-//            || checkDirection(lastRow,lastCol,1,1)
-//            || checkDirection(lastRow,lastCol,1,-1);
-//    // Vérifie l'alignement horizontal
-//    // Vérifie l'alignement vertical
-//    // Vérifie l'alignement diagonal (\)
-//    // Vérifie l'alignement diagonal (/)
-//}
